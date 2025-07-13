@@ -1,53 +1,60 @@
 
 body {
-    background-color: #f4f4f9;
+    background-color: #f9f4ff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    text-align: center;
-    padding: 50px;
     color: #333;
+    margin: 0;
+    padding: 0;
 }
 .container {
     max-width: 600px;
     margin: auto;
+    padding: 40px 20px;
+    text-align: center;
 }
 h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-p {
-    font-size: 1.2rem;
-}
-.small {
-    font-size: 0.9rem;
-    color: #888;
-}
-.loader {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #3498db;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    margin: 20px auto;
-    animation: spin 2s linear infinite;
-}
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-.ticket {
-    width: 80%;
-    margin: 20px 0;
+    color: #6a0dad;
 }
 .button {
     display: inline-block;
-    margin-top: 20px;
+    margin: 20px 0;
     padding: 12px 24px;
-    background-color: #3498db;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
+    background-color: #fcd34d;
+    color: #6a0dad;
     font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
 }
 .button:hover {
-    background-color: #2980b9;
+    background-color: #ffd60a;
+}
+.challenge {
+    background-color: #fff;
+    border: 2px dashed #d6bcfa;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+}
+.ticket {
+    width: 100%;
+    margin-top: 20px;
+}
+.message {
+    margin-top: 30px;
+}
+.message .quote {
+    font-style: italic;
+    margin-top: 10px;
+    color: #777;
+}
+.photo-gallery {
+    margin-top: 40px;
+}
+.photo-gallery img {
+    width: 45%;
+    margin: 5px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
