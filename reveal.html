@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,13 +15,16 @@
     <div class="container">
         <h1>💛 Your Surprise 💜</h1>
 
-        <div class="song">
-          <audio autoplay loop>
+        <!-- Music Player -->
+        <audio id="bg-music" autoplay loop>
             <source src="gale_song.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
-          </audio>
-        </div>
+        </audio>
 
+        <!-- Fallback Button for Mobile -->
+        <button onclick="document.getElementById('bg-music').play()" style="margin-top: 10px;">
+            🎵 Tap to Play Music
+        </button>
 
         <div class="message">
             <h2>[Placeholder Title — e.g. “Can’t wait to do this with you”]</h2>
@@ -42,5 +44,24 @@
             <img src="her2.jpg" alt="Another fun moment">
         </div>
     </div>
+
+    <!-- JS to try autoplay and hide fallback button if successful -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const audio = document.getElementById('bg-music');
+            const fallbackBtn = document.querySelector('button[onclick]');
+            if (audio) {
+                audio.play().then(() => {
+                    fallbackBtn.style.display = 'none';
+                }).catch((e) => {
+                    console.log("Autoplay blocked — waiting for user interaction.");
+                });
+
+                audio.addEventListener('play', () => {
+                    fallbackBtn.style.display = 'none';
+                });
+            }
+        });
+    </script>
 </body>
 </html>
