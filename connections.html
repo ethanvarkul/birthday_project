@@ -102,99 +102,96 @@
   <div id="solved-groups"></div>
 
   <script>
-    const categories = [
-      { name: "Zevy Sisters", words: ["Rena", "Rachie", "Danna", "Sammy"], color: "lavender" },
-      { name: "239 House Members", words: ["Emma", "Sarah", "Kyla", "Ellie"], color: "teal" },
-      { name: "Kingston Street Names", words: ["Albert", "Alfred", "William", "Earl"], color: "blue" },
-      { name: "Lumineers Songs", words: ["Ophelia", "Angela", "Gloria", "Cleopatra"], color: "pink" }
-    ];
+  const categories = [
+    { name: "Zevy Sisters", words: ["Rena", "Rachie", "Danna", "Sammy"], color: "lavender" },
+    { name: "239 House Members", words: ["Emma", "Sarah", "Kyla", "Ellie"], color: "teal" },
+    { name: "Kingston Street Names", words: ["Albert", "Alfred", "William", "Earl"], color: "blue" },
+    { name: "Lumineers Songs", words: ["Ophelia", "Angela", "Gloria", "Cleopatra"], color: "pink" }
+  ];
 
-    let allWords = categories.flatMap(cat => cat.words);
-    let remainingWords = [...allWords];
-    let selected = [];
-    const grid = document.getElementById("grid");
-    const message = document.getElementById("message");
-    const solvedDiv = document.getElementById("solved-groups");
-    let solvedCount = 0;
+  let allWords = categories.flatMap(cat => cat.words);
+  let remainingWords = [...allWords];
+  let selected = [];
+  const grid = document.getElementById("grid");
+  const message = document.getElementById("message");
+  const solvedDiv = document.getElementById("solved-groups");
+  let solvedCount = 0;
 
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  function createGrid() {
+    shuffle(remainingWords);
+    grid.innerHTML = "";
+    remainingWords.forEach(word => {
+      const div = document.createElement("div");
+      div.className = "word";
+      div.innerText = word;
+      div.onclick = () => selectWord(div, word);
+      grid.appendChild(div);
+    });
+  }
+
+  function selectWord(element, word) {
+    if (!remainingWords.includes(word)) return;
+    if (selected.includes(word)) {
+      selected = selected.filter(w => w !== word);
+      element.classList.remove("selected");
+    } else if (selected.length < 4) {
+      selected.push(word);
+      element.classList.add("selected");
+    }
+  }
+
+  function submitGroup() {
+    if (selected.length !== 4) {
+      message.innerText = "Select exactly 4 words.";
+      return;
     }
 
-    function createGrid() {
-      shuffle(remainingWords);
-      grid.innerHTML = "";
-      remainingWords.forEach(word => {
-        const div = document.createElement("div");
-        div.className = "word";
-        div.innerText = word;
-        div.onclick = () => selectWord(div, word);
-        grid.appendChild(div);
+    const matchedCategory = categories.find(cat =>
+      cat.words.every(word => selected.includes(word)) &&
+      cat.words.every(word => remainingWords.includes(word))
+    );
+
+    if (matchedCategory) {
+      message.innerText = `✅ Correct! Group: ${matchedCategory.name}`;
+      matchedCategory.words.forEach(word => {
+        remainingWords = remainingWords.filter(w => w !== word);
       });
+      updateSolvedDisplay(matchedCategory);
+      solvedCount++;
+
+      selected = [];
+      createGrid();
+    } else {
+      message.innerText = "❌ Try again.";
+      selected = [];
+      document.querySelectorAll(".word").forEach(div => div.classList.remove("selected"));
     }
+  }
 
-    function selectWord(element, word) {
-      if (!remainingWords.includes(word)) return;
-      if (selected.includes(word)) {
-        selected = selected.filter(w => w !== word);
-        element.classList.remove("selected");
-      } else if (selected.length < 4) {
-        selected.push(word);
-        element.classList.add("selected");
-      }
-    }
+  function updateSolvedDisplay(category) {
+    const groupDiv = document.createElement("div");
+    groupDiv.className = "category";
+    groupDiv.innerHTML = `<h2>${category.name}</h2>`;
+    const row = document.createElement("div");
+    row.className = "row";
+    category.words.forEach(word => {
+      const div = document.createElement("div");
+      div.className = `word correct ${category.color}`;
+      div.innerText = word;
+      row.appendChild(div);
+    });
+    groupDiv.appendChild(row);
+    solvedDiv.appendChild(groupDiv);
+  }
 
-    function submitGroup() {
-      if (selected.length !== 4) {
-        message.innerText = "Select exactly 4 words.";
-        return;
-      }
-
-      const matchedCategory = categories.find(cat =>
-        cat.words.every(word => selected.includes(word)) &&
-        cat.words.every(word => remainingWords.includes(word))
-      );
-
-      if (matchedCategory) {
-        message.innerText = `✅ Correct! Group: ${matchedCategory.name}`;
-        matchedCategory.words.forEach(word => {
-          remainingWords = remainingWords.filter(w => w !== word);
-        });
-        updateSolvedDisplay(matchedCategory);
-        solvedCount++;
-
-        selected = [];
-        createGrid();
-      } else {
-        message.innerText = "❌ Try again.";
-        selected = [];
-        document.querySelectorAll(".word").forEach(div => div.classList.remove("selected"));
-      }
-    }
-
-    
-    }
-
-    function updateSolvedDisplay(category) {
-      const groupDiv = document.createElement("div");
-      groupDiv.className = "category";
-      groupDiv.innerHTML = `<h2>${category.name}</h2>`;
-      const row = document.createElement("div");
-      row.className = "row";
-      category.words.forEach(word => {
-        const div = document.createElement("div");
-        div.className = `word correct ${category.color}`;
-        div.innerText = word;
-        row.appendChild(div);
-      });
-      groupDiv.appendChild(row);
-      solvedDiv.appendChild(groupDiv);
-    }
-
-    createGrid();
-  </script>
+  createGrid();
+</script>
 </body>
 </html>
