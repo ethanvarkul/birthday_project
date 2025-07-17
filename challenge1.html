@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Challenge 1: Name That Tune</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom right, #e0bbff, #ffffcc);
+      color: #333;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #6a1b9a;
+      font-size: 1.8em;
+    }
+
+    .song-box {
+      margin: 20px 0;
+    }
+
+    audio {
+      width: 90%;
+      max-width: 300px;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 1em;
+      border: 2px solid #6a1b9a;
+      border-radius: 8px;
+      width: 70%;
+      max-width: 300px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #fdd835;
+      color: #6a1b9a;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    #next-btn {
+      display: none;
+      margin-top: 30px;
+      background-color: #6a1b9a;
+      color: white;
+    }
+
+    .feedback {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎵 Challenge 1: Name That Tune 🎶</h1>
+  <p>Tap play, listen to the clip, and guess the song title. Not case sensitive. Good luck!</p>
+
+  <div class="song-box">
+    <audio id="audio1" controls>
+      <source src="free.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+    <br />
+    <input type="text" id="guess1" placeholder="Type your guess here" />
+    <br />
+    <button onclick="checkAnswer()">Submit</button>
+    <div class="feedback" id="feedback"></div>
+  </div>
+
+  <a href="challenge2.html">
+    <button id="next-btn">Go to Challenge 2 →</button>
+  </a>
+
+  <script>
+    function checkAnswer() {
+      const userGuess = document.getElementById("guess1").value.trim().toLowerCase();
+      const correctAnswer = "free";
+      const feedback = document.getElementById("feedback");
+      const nextBtn = document.getElementById("next-btn");
+
+      if (userGuess === correctAnswer) {
+        feedback.textContent = "✅ Correct!";
+        nextBtn.style.display = "inline-block";
+      } else {
+        feedback.textContent = "❌ Try again!";
+      }
+    }
+  </script>
+</body>
+</html>
