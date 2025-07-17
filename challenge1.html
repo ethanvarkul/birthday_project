@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🎵 Name That Tune</title>
   <style>
     body {
@@ -11,42 +11,47 @@
       color: #333;
       text-align: center;
       padding: 20px;
+      margin: 0;
     }
 
     h1 {
       color: #6a1b9a;
+      font-size: 2em;
+      margin-bottom: 0.5em;
     }
 
     audio {
-      margin: 20px auto;
       width: 90%;
       max-width: 400px;
+      margin: 20px auto;
+      display: block;
     }
 
     input[type="text"] {
       padding: 10px;
-      width: 80%;
-      max-width: 300px;
-      margin: 10px auto;
-      border: 2px solid #6a1b9a;
-      border-radius: 8px;
       font-size: 1em;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 70%;
+      max-width: 300px;
+      margin-top: 10px;
     }
 
     button {
+      margin-top: 15px;
       padding: 10px 20px;
-      margin-top: 10px;
-      background-color: #fdd835;
-      color: #6a1b9a;
+      background-color: #6a1b9a;
+      color: white;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       font-size: 1em;
       cursor: pointer;
     }
 
     #feedback {
-      margin-top: 15px;
-      font-size: 1.1em;
+      margin-top: 10px;
+      font-size: 1.2em;
+      font-weight: bold;
     }
 
     #next-btn {
@@ -57,24 +62,26 @@
 </head>
 <body>
   <h1>🎵 Name That Tune</h1>
-  <p>Listen to the clip and guess the song title.</p>
+  <audio id="audioPlayer" controls></audio>
 
-  <audio id="audioPlayer" controls></audio><br>
-  <input type="text" id="guess" placeholder="Enter song title" /><br>
-  <button onclick="checkGuess()">Submit</button>
+  <div>
+    <input type="text" id="guess" placeholder="Enter song title...">
+    <br>
+    <button onclick="checkGuess()">Submit</button>
+    <p id="feedback"></p>
+  </div>
 
-  <div id="feedback"></div>
-
-  <a href="challenge2.html"><button id="next-btn">Next Challenge</button></a>
+  <a href="connections.html" id="next-btn">
+    <button>Next Challenge</button>
+  </a>
 
   <script>
     const songs = [
       { file: "free.mp3", answer: "Free" },
+      { file: "cherrywine.mp3", answer: "Cherry Wine" },
       { file: "trouble.mp3", answer: "Trouble" },
       { file: "skies.mp3", answer: "When the Skies are Blue" },
       { file: "gun.mp3", answer: "Gun Song" },
-      { file: "gale_song.mp3", answer: "Gale Song" },
-      { file: "cherrywine.mp3", answer: "Cherry Wine" },
       { file: "hohey.mp3", answer: "Ho Hey" }
     ];
 
