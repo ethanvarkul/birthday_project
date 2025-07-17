@@ -3,97 +3,106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Surprise</title>
+  <title>🎉 Your Surprise</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background-color: #f5edff;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom right, #fce4ec, #ede7f6);
       color: #333;
       text-align: center;
       padding: 20px;
     }
 
     h1 {
-      font-size: 2rem;
-      color: #6a0dad;
-      margin-bottom: 0.5em;
+      font-size: 2em;
+      color: #6a1b9a;
     }
 
     h2 {
-      font-size: 1.5rem;
-      margin-top: 2em;
+      font-size: 1.3em;
+      margin: 10px 0;
     }
 
-    .highlight {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #5d2a91;
+    p {
+      margin: 0.5em 0 1.2em;
+      padding: 0 10px;
+    }
+
+    .lyrics {
+      font-style: italic;
+      color: #666;
+      margin-top: -10px;
+      margin-bottom: 20px;
     }
 
     .button {
-      background-color: #f7c948;
-      color: #5d2a91;
+      background-color: #fdd835;
+      color: #6a1b9a;
+      padding: 12px 22px;
+      font-size: 1em;
       border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-size: 1rem;
-      margin-top: 20px;
+      border-radius: 10px;
       cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
-    .ticket-section {
-      margin-top: 30px;
-    }
-
-    .ticket-section img {
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      margin: 20px 0;
-    }
-
-    .concert-moments {
+    .section {
       margin-top: 40px;
     }
 
-    .concert-moments img {
-      max-width: 45%;
-      margin: 10px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    .ticket {
+      width: 100%;
+      max-width: 380px;
+      border-radius: 12px;
+      margin: 15px auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     audio {
       display: block;
-      margin: 20px auto;
+      margin: 25px auto;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 1.7em;
+      }
+
+      h2 {
+        font-size: 1.2em;
+      }
+
+      .button {
+        font-size: 1em;
+      }
     }
   </style>
 </head>
 <body>
   <h1>💛 Your Surprise 💜</h1>
 
-  <p class="highlight">I can't wait for this night with you!</p>
-  <p>We'll be surrounded by music, good vibes, and each other. Get ready for a night to remember — The Lumineers, live on stage!</p>
-  <p><em>"If this is the end, I must admit, you made me better than I've ever been..."</em></p>
+  <h2>“We’re going to see The Lumineers!”</h2>
+  <p>I can’t wait for this night. A perfect artist, perfect vibe, perfect company. This is going to be so special 💫</p>
+  <p class="lyrics">"It's a lonely road full of tired men, and you can see it in their faces..."</p>
 
-  <audio autoplay loop controls>
-    <source src="Gale Song.mp3" type="audio/mpeg" />
+  <audio controls autoplay loop>
+    <source src="gale_song.mp3" type="audio/mpeg" />
     Your browser does not support the audio element.
   </audio>
 
-  <div class="ticket-section">
-    <h2>🎟️ We're Going to See The Lumineers!</h2>
-    <p>September 9th, 2025 at Budweiser Stage</p>
-    <img src="images/ticket_main.jpeg" alt="Lumineers Ticket" />
-    <p>Section: <strong>LAWN 6 - The Aperol Lawn</strong></p>
+  <div class="section">
+    <h2>🎟️ Our Tickets</h2>
+    <img src="ticket1.jpeg" alt="The Lumineers Ticket - Main" class="ticket" />
+    <img src="ticket2.jpeg" alt="The Lumineers Ticket - Wallet View" class="ticket" />
   </div>
 
-  <div class="concert-moments">
-    <h2>🎵 Your Concert Moments 🎵</h2>
-    <img src="images/music1.jpg" alt="Her enjoying music" />
-    <img src="images/music2.jpg" alt="Another fun moment" />
+  <div class="section">
+    <h2>🎶 Your Concert Moments</h2>
+    <img src="concert1.jpg" alt="Her enjoying music" class="ticket" />
+    <img src="concert2.jpg" alt="Another fun moment" class="ticket" />
   </div>
 </body>
 </html>
