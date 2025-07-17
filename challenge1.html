@@ -81,20 +81,48 @@
     <button id="next-btn">Go to Challenge 2 →</button>
   </a>
 
-  <script>
-    function checkAnswer() {
-      const userGuess = document.getElementById("guess1").value.trim().toLowerCase();
-      const correctAnswer = "free";
-      const feedback = document.getElementById("feedback");
-      const nextBtn = document.getElementById("next-btn");
+<script>
+  const songs = [
+    { file: "free.mp3", answer: "Free" },
+    { file: "trouble.mp3", answer: "Trouble" },
+    { file: "skies.mp3", answer: "When the Skies are Blue" },
+    { file: "gun.mp3", answer: "Gun Song" },
+    { file: "gale_song.mp3", answer: "Gale Song" },
+    { file: "cherrywine.mp3", answer: "Cherry Wine" },
+    { file: "hohey.mp3", answer: "Ho Hey" }
+  ];
 
-      if (userGuess === correctAnswer) {
-        feedback.textContent = "✅ Correct!";
-        nextBtn.style.display = "inline-block";
+  let currentIndex = 0;
+
+  function loadSong() {
+    const player = document.getElementById("audioPlayer");
+    player.src = songs[currentIndex].file;
+    document.getElementById("feedback").innerText = "";
+    document.getElementById("guess").value = "";
+  }
+
+  function checkGuess() {
+    const input = document.getElementById("guess").value.trim().toLowerCase();
+    const answer = songs[currentIndex].answer.toLowerCase();
+
+    if (input === answer) {
+      document.getElementById("feedback").innerText = "✅ Correct!";
+      currentIndex++;
+
+      if (currentIndex < songs.length) {
+        setTimeout(() => loadSong(), 1000);
       } else {
-        feedback.textContent = "❌ Try again!";
+        document.getElementById("feedback").innerText = "🎉 All correct!";
+        document.getElementById("next-btn").style.display = "block";
+        document.getElementById("audioPlayer").src = "";
       }
+    } else {
+      document.getElementById("feedback").innerText = "❌ Try again!";
     }
-  </script>
+  }
+
+  window.onload = loadSong;
+</script>
+
 </body>
 </html>
