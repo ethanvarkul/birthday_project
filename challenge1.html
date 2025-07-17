@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Challenge 1: Name That Tune</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎵 Name That Tune</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom right, #e0bbff, #ffffcc);
+      background: linear-gradient(to bottom right, #fce4ec, #ede7f6);
       color: #333;
       text-align: center;
       padding: 20px;
@@ -15,114 +15,99 @@
 
     h1 {
       color: #6a1b9a;
-      font-size: 1.8em;
-    }
-
-    .song-box {
-      margin: 20px 0;
     }
 
     audio {
+      margin: 20px auto;
       width: 90%;
-      max-width: 300px;
-      margin-bottom: 10px;
+      max-width: 400px;
     }
 
     input[type="text"] {
       padding: 10px;
-      font-size: 1em;
+      width: 80%;
+      max-width: 300px;
+      margin: 10px auto;
       border: 2px solid #6a1b9a;
       border-radius: 8px;
-      width: 70%;
-      max-width: 300px;
+      font-size: 1em;
     }
 
     button {
-      margin-top: 10px;
       padding: 10px 20px;
+      margin-top: 10px;
       background-color: #fdd835;
       color: #6a1b9a;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 1em;
       cursor: pointer;
+    }
+
+    #feedback {
+      margin-top: 15px;
+      font-size: 1.1em;
     }
 
     #next-btn {
       display: none;
       margin-top: 30px;
-      background-color: #6a1b9a;
-      color: white;
-    }
-
-    .feedback {
-      margin-top: 10px;
-      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1>🎵 Challenge 1: Name That Tune 🎶</h1>
-  <p>Tap play, listen to the clip, and guess the song title. Not case sensitive. Good luck!</p>
+  <h1>🎵 Name That Tune</h1>
+  <p>Listen to the clip and guess the song title.</p>
 
-  <div class="song-box">
-    <audio id="audio1" controls>
-      <source src="free.mp3" type="audio/mpeg" />
-      Your browser does not support the audio element.
-    </audio>
-    <br />
-    <input type="text" id="guess1" placeholder="Type your guess here" />
-    <br />
-    <button onclick="checkAnswer()">Submit</button>
-    <div class="feedback" id="feedback"></div>
-  </div>
+  <audio id="audioPlayer" controls></audio><br>
+  <input type="text" id="guess" placeholder="Enter song title" /><br>
+  <button onclick="checkGuess()">Submit</button>
 
-  <a href="connections.html">
-    <button id="next-btn">Go to Challenge 2 →</button>
-  </a>
+  <div id="feedback"></div>
 
-<script>
-  const songs = [
-    { file: "free.mp3", answer: "Free" },
-    { file: "trouble.mp3", answer: "Trouble" },
-    { file: "skies.mp3", answer: "When the Skies are Blue" },
-    { file: "gun.mp3", answer: "Gun Song" },
-    { file: "gale_song.mp3", answer: "Gale Song" },
-    { file: "cherrywine.mp3", answer: "Cherry Wine" },
-    { file: "hohey.mp3", answer: "Ho Hey" }
-  ];
+  <a href="challenge2.html"><button id="next-btn">Next Challenge</button></a>
 
-  let currentIndex = 0;
+  <script>
+    const songs = [
+      { file: "free.mp3", answer: "Free" },
+      { file: "trouble.mp3", answer: "Trouble" },
+      { file: "skies.mp3", answer: "When the Skies are Blue" },
+      { file: "gun.mp3", answer: "Gun Song" },
+      { file: "gale_song.mp3", answer: "Gale Song" },
+      { file: "cherrywine.mp3", answer: "Cherry Wine" },
+      { file: "hohey.mp3", answer: "Ho Hey" }
+    ];
 
-  function loadSong() {
-    const player = document.getElementById("audioPlayer");
-    player.src = songs[currentIndex].file;
-    document.getElementById("feedback").innerText = "";
-    document.getElementById("guess").value = "";
-  }
+    let currentIndex = 0;
 
-  function checkGuess() {
-    const input = document.getElementById("guess").value.trim().toLowerCase();
-    const answer = songs[currentIndex].answer.toLowerCase();
-
-    if (input === answer) {
-      document.getElementById("feedback").innerText = "✅ Correct!";
-      currentIndex++;
-
-      if (currentIndex < songs.length) {
-        setTimeout(() => loadSong(), 1000);
-      } else {
-        document.getElementById("feedback").innerText = "🎉 All correct!";
-        document.getElementById("next-btn").style.display = "block";
-        document.getElementById("audioPlayer").src = "";
-      }
-    } else {
-      document.getElementById("feedback").innerText = "❌ Try again!";
+    function loadSong() {
+      const player = document.getElementById("audioPlayer");
+      player.src = songs[currentIndex].file;
+      document.getElementById("guess").value = "";
+      document.getElementById("feedback").innerText = "";
     }
-  }
 
-  window.onload = loadSong;
-</script>
+    function checkGuess() {
+      const input = document.getElementById("guess").value.trim().toLowerCase();
+      const correct = songs[currentIndex].answer.toLowerCase();
 
+      if (input === correct) {
+        document.getElementById("feedback").innerText = "✅ Correct!";
+        currentIndex++;
+
+        if (currentIndex < songs.length) {
+          setTimeout(loadSong, 1000);
+        } else {
+          document.getElementById("feedback").innerText = "🎉 You guessed them all!";
+          document.getElementById("audioPlayer").src = "";
+          document.getElementById("next-btn").style.display = "inline-block";
+        }
+      } else {
+        document.getElementById("feedback").innerText = "❌ Try again!";
+      }
+    }
+
+    window.onload = loadSong;
+  </script>
 </body>
 </html>
